@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
 });
 
-function MovieListPageTemplate({ movies, title, selectFavorite }) {
+function MovieListPageTemplate({ movies, title, action }) {
   const classes = useStyles();
   const [nameFilter, setNameFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
@@ -33,6 +33,7 @@ function MovieListPageTemplate({ movies, title, selectFavorite }) {
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12}>
+      <MovieList action={action} movies={displayedMovies}></MovieList>
         <Header title={title} />
       </Grid>
       <Grid item container spacing={5}>
