@@ -4,6 +4,7 @@ import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
 import useMovie from "../hooks/useMovie";
 
+
 const MovieDetailsPage = (props) => {
   const { id } = props.match.params;
   const [movie] = useMovie(id);
