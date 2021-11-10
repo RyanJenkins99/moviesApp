@@ -8,6 +8,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import PlaylistAdd from "@material-ui/icons/PlaylistAdd";
 import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,8 +19,8 @@ import Avatar from "@material-ui/core/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 const useStyles = makeStyles({
-  card: { maxWidth: 345 },
-  media: { height: 500 },
+  card: {maxWidth: 345},
+  media: {height: 500},
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
   },
@@ -27,18 +28,19 @@ const useStyles = makeStyles({
 
 export default function MovieCard({ movie, action }) {
   const classes = useStyles();
-  const { favorites, addToFavorites } = useContext(MoviesContext);
+  const {favorites, mustWatch} = useContext(MoviesContext);
 
   if (favorites.find((id) => id === movie.id)) {
-    movie.favorite = true;
+    movie.favorite = true
   } else {
     movie.favorite = false
   }
 
-  const handleAddToFavorite = (e) => {
-    e.preventDefault();
-    addToFavorites(movie);
-  };
+  if (mustWatch.find((id) => id === movie.id)) {
+    movie.mustWatch = true
+} else {
+    movie.mustWatch = false
+}
 
   return (
     <Card className={classes.card}>
@@ -47,9 +49,15 @@ export default function MovieCard({ movie, action }) {
       avatar={
         movie.favorite ? (
           <Avatar className={classes.avatar}>
-            <FavoriteIcon />
-          </Avatar>
-        ) : null
+          <FavoriteIcon/>
+      </Avatar>
+  ) :
+  movie.mustWatch ? (
+      <Avatar className={classes.avatar}>
+          <PlaylistAdd/>
+      </Avatar>
+  ) : null
+
       }
       title={
         <Typography variant="h5" component="p">
@@ -91,4 +99,4 @@ export default function MovieCard({ movie, action }) {
       </CardActions>
     </Card>
   );
-};
+}
