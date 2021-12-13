@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import Header from "../headerMovieList";
-import FilterCard from "../filterMoviesCard";
+import Header from "../headerPeopleList";
+import FilterCard from "../filterPeopleCard";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
-import MovieList from "../movieList";
+import PeopleList from "../peopleList";
 //import Paginator from "../Paginator";
-import HomePage from "../../pages/homePage";
+
 
 const useStyles = makeStyles({
     root: {
@@ -13,13 +13,13 @@ const useStyles = makeStyles({
     },
 });
 
-function MovieListPageTemplate({movies, title, action}) {
+function PeopleListPageTemplate({people, title, action}) {
     const classes = useStyles();
     const [nameFilter, setNameFilter] = useState("");
     const [genreFilter, setGenreFilter] = useState("0");
     const genreId = Number(genreFilter);
 
-    let displayedMovies = movies
+    let displayedPeople = people
         .filter((m) => {
             return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
         })
@@ -37,7 +37,7 @@ function MovieListPageTemplate({movies, title, action}) {
             <Grid item xs={12}>
                 <Header title={title}/>
             </Grid>
-            <MovieList action={action} movies={displayedMovies}/>
+            <PeopleList action={action} people={displayedPeople}/>
             <Grid item container spacing={5}>
                 <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
                     <FilterCard
@@ -53,4 +53,4 @@ function MovieListPageTemplate({movies, title, action}) {
     );
 }
 
-export default MovieListPageTemplate;
+export default PeopleListPageTemplate;
