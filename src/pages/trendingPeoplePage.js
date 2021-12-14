@@ -11,6 +11,7 @@ const TrendingPeoplePage = (props) => {
   if (isLoading) return <Spinner/>
   if (isError) return <h1>{error.message}</h1>
   const people = data.results;
+  console.log(people);
   const favorites = people.filter(m => m.favorite)
   localStorage.setItem('favorites', JSON.stringify(favorites))
 
