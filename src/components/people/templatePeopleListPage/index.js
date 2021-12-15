@@ -17,31 +17,27 @@ function PeopleListPageTemplate({people, title, action}) {
     const classes = useStyles();
     const [nameFilter, setNameFilter] = useState("");
     
-
-    let displayedPeople = people
-        .filter((m) => {
-            return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
-        })
+    console.log("RUGBYYYYY ", people)
+    // let displayedPeople = people
+    //     .filter((m) => {
+    //         return m.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+    //     })
         
 
-    const handleChange = (type, value) => {
-        if (type === "name") setNameFilter(value);
+    // const handleChange = (type, value) => {
+    //     if (type === "name") setNameFilter(value);
         
-    };
+    // };
 
     return (
         <Grid container className={classes.root}>
             <Grid item xs={12}>
                 <Header title={title}/>
             </Grid>
-            <PeopleList action={action} people={displayedPeople}/>
+            <PeopleList action={action} people={people}/>
             <Grid item container spacing={5}>
                 <Grid key="find" item xs={12} sm={6} md={4} lg={3} xl={2}>
-                    <FilterCard
-                        onUserInput={handleChange}
-                        nameFilter={nameFilter}
-                        
-                    />
+                 
                 </Grid>
             </Grid>
         </Grid>

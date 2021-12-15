@@ -26,52 +26,29 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MovieCard({ movie, action }) {
+export default function PeopleCard({ people , action }) {
   const classes = useStyles();
-  const {favorites, mustWatch} = useContext(MoviesContext);
-
-
+ 
   
-  if (favorites.find((id) => id === movie.id)) {
-    movie.favorite = true
-  } else {
-    movie.favorite = false
-  }
 
-  if (mustWatch.find((id) => id === movie.id)) {
-    movie.mustWatch = true
-} else {
-    movie.mustWatch = false
-}
+
 
   return (
     <Card className={classes.card}>
           <CardHeader
       className={classes.header}
-      avatar={
-        movie.favorite ? (
-          <Avatar className={classes.avatar}>
-          <FavoriteIcon/>
-      </Avatar>
-  ) :
-  movie.mustWatch ? (
-      <Avatar className={classes.avatar}>
-          <PlaylistAdd/>
-      </Avatar>
-  ) : null
-
-      }
+      
       title={
         <Typography variant="h5" component="p">
-          {movie.title}{" "}
+          {people.name}{" "}
         </Typography>
       }
     />
       <CardMedia
         className={classes.media}
         image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+          people.profile_path
+            ? `https://image.tmdb.org/t/p/w500/${people.profile_path}`
             : img
         }
       />
@@ -79,26 +56,20 @@ export default function MovieCard({ movie, action }) {
         <Grid container>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
-              {movie.release_date}
+            
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
+              <StarRateIcon fontSize="small" />
+              <StarRateIcon fontSize="small" />
+              {" Popularity:  "} {people.popularity}{" "}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions disableSpacing>
-                {action(movie)}
-        <Link to={`/movies/${movie.id}`}>
-          <Button variant="outlined" size="medium" color="primary">
-            More Info ...
-          </Button>
-        </Link>
-      </CardActions>
+    
     </Card>
   );
 }

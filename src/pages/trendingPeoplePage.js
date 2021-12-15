@@ -12,16 +12,12 @@ const TrendingPeoplePage = (props) => {
   if (isError) return <h1>{error.message}</h1>
   const people = data.results;
   console.log(people);
-  const favorites = people.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
 
-  const mustWatch = people.filter(m => m.mustWatch)
-  localStorage.setItem('mustWatch', JSON.stringify(mustWatch))
 
   return (
     <PageTemplate
       title="Trending People"
-      movies={people}
+      people={people}
       action={(movie) => {
         return <AddToPlaylistIcon movie={movie} />
     }}
